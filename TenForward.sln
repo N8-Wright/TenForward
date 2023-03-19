@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcxproj", "{722C454B-F5B0-4DFB-84F6-57C99905B980}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TFStringTests", "TFStringTests\TFStringTests.vcxproj", "{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{722C454B-F5B0-4DFB-84F6-57C99905B980}.Release|x64.Build.0 = Release|x64
 		{722C454B-F5B0-4DFB-84F6-57C99905B980}.Release|x86.ActiveCfg = Release|Win32
 		{722C454B-F5B0-4DFB-84F6-57C99905B980}.Release|x86.Build.0 = Release|Win32
+		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Debug|x64.ActiveCfg = Debug|x64
+		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Debug|x64.Build.0 = Debug|x64
+		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Debug|x86.ActiveCfg = Debug|Win32
+		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Debug|x86.Build.0 = Debug|Win32
+		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Release|x64.ActiveCfg = Release|x64
+		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Release|x64.Build.0 = Release|x64
+		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Release|x86.ActiveCfg = Release|Win32
+		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
