@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcxproj", "{722C454B-F5B0-4DFB-84F6-57C99905B980}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TenForward.String", "TenForward.String\TenForward.String.vcxproj", "{722C454B-F5B0-4DFB-84F6-57C99905B980}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TFStringTests", "TFStringTests\TFStringTests.vcxproj", "{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TenForward.UnitTest", "TenForward.UnitTest\TenForward.UnitTest.vcxproj", "{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

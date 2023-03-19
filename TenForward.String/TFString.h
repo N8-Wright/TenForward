@@ -43,7 +43,7 @@ extern "C"
 	/// </summary>
 	/// <param name="str">The TF_String's data to examine.</param>
 	/// <returns>A pointer to the data. This is not guaranteed to be null-terminated.</returns>
-	wchar_t* TF_StringData(TF_String* str);
+	wchar_t* TF_StringData(const TF_String* str);
 
 	/// <summary>
 	/// Frees any underlying data associated with a TF_String.
