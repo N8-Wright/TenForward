@@ -37,7 +37,19 @@ extern "C"
 	/// 
 	/// <returns>An initialzed TF_String.</returns>
 	TF_String TF_StringCreateEx(wchar_t* str, size_t length);
-	wchar_t* TF_StringData(TF_String*);
+
+	/// <summary>
+	/// Get a pointer to the underlying string data.
+	/// </summary>
+	/// <param name="str">The TF_String's data to examine.</param>
+	/// <returns>A pointer to the data. This is not guaranteed to be null-terminated.</returns>
+	wchar_t* TF_StringData(TF_String* str);
+
+	/// <summary>
+	/// Frees any underlying data associated with a TF_String.
+	/// </summary>
+	/// <param name="str">The TF_String to destroy.</param>
+	void TF_StringDestroy(TF_String* str);
 #ifdef __cplusplus
 }
 #endif

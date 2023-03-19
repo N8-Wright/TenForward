@@ -36,6 +36,8 @@ namespace TFStringTests
 			Assert::AreEqual(str.length, length);
 			Assert::AreEqual(str.capacity, length);
 			ArraysAreEqual(test, TF_StringData(&str), length);
+
+			TF_StringDestroy(&str);
 		}
 	};
 }

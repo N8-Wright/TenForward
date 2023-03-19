@@ -42,3 +42,14 @@ wchar_t* TF_StringData(TF_String* str)
 		return str->data;
 	}
 }
+
+void TF_StringDestroy(TF_String* str)
+{
+	if (str->length > TF_SMALL_STRING_SIZE)
+	{
+		wchar_t* ptr;
+		memcpy(&ptr, str->data, sizeof(wchar_t*));
+		free(ptr);
+	}
+}
+
