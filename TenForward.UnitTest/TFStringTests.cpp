@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CppUnitTest.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -121,6 +121,19 @@ namespace TFStringTests
 
 			TF_StringDestroy(&str1);
 			TF_StringDestroy(&str2);
+		}
+
+		TEST_METHOD(Resize_CapacityChanges)
+		{
+			wchar_t test[] = L"Test 😂";
+			size_t testLength = sizeof(test) / sizeof(test[0]);
+			TF_String str = TF_StringCreateEx(test, testLength);
+
+			size_t expectedLength = str.length;
+			TF_StringResize(&str, 100);
+			Assert::AreEqual(str.capacity, (size_t)100);
+			Assert::AreEqual(str.length, expectedLength);
+			ArraysAreEqual(test, TF_StringData(&str), testLength);
 		}
 	};
 }

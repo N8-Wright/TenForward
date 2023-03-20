@@ -39,7 +39,7 @@ TF_String TF_StringCreateEx(wchar_t* str, size_t length)
 
 const wchar_t* TF_StringData(const TF_String* str)
 {
-	if (str->length > TF_SMALL_STRING_SIZE)
+	if (str->capacity > TF_SMALL_STRING_SIZE)
 	{
 		return GetDataPtr(str);
 	}
