@@ -40,7 +40,7 @@ namespace TFStringTests
 			TF_StringDestroy(&str);
 		}
 
-		TEST_METHOD(AppendString_SmallToLarge)
+		TEST_METHOD(AppendString_LargeAppendToSmall)
 		{
 			wchar_t test1[] = L"Hello";
 			size_t length1 = sizeof(test1) / sizeof(test1[0]) - 1;
@@ -54,6 +54,64 @@ namespace TFStringTests
 			TF_StringAppend(&str1, &str2);
 
 			wchar_t expected[] = L"Hello World! This is a test append.";
+			Assert::AreEqual(str1.length, length1 + length2);
+			Assert::AreEqual(str1.capacity, length1 + length2);
+			ArraysAreEqual(
+				expected,
+				TF_StringData(&str1),
+				sizeof(expected) / sizeof(expected[0]) - 1);
+
+			TF_StringDestroy(&str1);
+			TF_StringDestroy(&str2);
+		}
+
+		TEST_METHOD(AppendString_SmallAppendToLarge)
+		{
+			wchar_t test1[] = L"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
+				L"incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation "
+				L"ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit "
+				L"in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat "
+				L"non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+			size_t length1 = sizeof(test1) / sizeof(test1[0]) - 1;
+			TF_String str1 = TF_StringCreateEx(test1, length1);
+
+
+			wchar_t test2[] = L" Small";
+			size_t length2 = sizeof(test2) / sizeof(test2[0]) - 1;
+			TF_String str2 = TF_StringCreateEx(test2, length2);
+
+			TF_StringAppend(&str1, &str2);
+
+			wchar_t expected[] = L"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
+				L"incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation "
+				L"ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit "
+				L"in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat "
+				L"non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Small";
+			Assert::AreEqual(str1.length, length1 + length2);
+			Assert::AreEqual(str1.capacity, length1 + length2);
+			ArraysAreEqual(
+				expected,
+				TF_StringData(&str1),
+				sizeof(expected) / sizeof(expected[0]) - 1);
+
+			TF_StringDestroy(&str1);
+			TF_StringDestroy(&str2);
+		}
+
+		TEST_METHOD(AppendString_SmallAppendToSmall)
+		{
+			wchar_t test1[] = L"Hello";
+			size_t length1 = sizeof(test1) / sizeof(test1[0]) - 1;
+			TF_String str1 = TF_StringCreateEx(test1, length1);
+
+
+			wchar_t test2[] = L" World!";
+			size_t length2 = sizeof(test2) / sizeof(test2[0]) - 1;
+			TF_String str2 = TF_StringCreateEx(test2, length2);
+
+			TF_StringAppend(&str1, &str2);
+
+			wchar_t expected[] = L"Hello World!";
 			Assert::AreEqual(str1.length, length1 + length2);
 			Assert::AreEqual(str1.capacity, length1 + length2);
 			ArraysAreEqual(
