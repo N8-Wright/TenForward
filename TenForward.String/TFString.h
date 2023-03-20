@@ -43,13 +43,17 @@ extern "C"
 	/// </summary>
 	/// <param name="str">The TF_String's data to examine.</param>
 	/// <returns>A pointer to the data. This is not guaranteed to be null-terminated.</returns>
-	wchar_t* TF_StringData(const TF_String* str);
+	const wchar_t* TF_StringData(const TF_String* str);
 
 	/// <summary>
 	/// Frees any underlying data associated with a TF_String.
 	/// </summary>
 	/// <param name="str">The TF_String to destroy.</param>
 	void TF_StringDestroy(TF_String* str);
+
+	void TF_StringAppend(TF_String* str, const TF_String* other);
+
+	void TF_StringResize(TF_String* str, size_t capacity);
 #ifdef __cplusplus
 }
 #endif
