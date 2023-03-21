@@ -123,7 +123,7 @@ namespace TFStringTests
 			TF_StringDestroy(&str2);
 		}
 
-		TEST_METHOD(Resize_CapacityChanges)
+		TEST_METHOD(Resize_SmallToLarge)
 		{
 			wchar_t test[] = L"Test 😂";
 			size_t testLength = sizeof(test) / sizeof(test[0]);
@@ -134,6 +134,49 @@ namespace TFStringTests
 			Assert::AreEqual(str.capacity, (size_t)100);
 			Assert::AreEqual(str.length, expectedLength);
 			ArraysAreEqual(test, TF_StringData(&str), testLength);
+		}
+
+		TEST_METHOD(Resize_SmallToSmall)
+		{
+			wchar_t test[] = L"1";
+			size_t testLength = sizeof(test) / sizeof(test[0]);
+			TF_String str = TF_StringCreateEx(test, testLength);
+
+			size_t expectedLength = str.length;
+			TF_StringResize(&str, TF_SMALL_STRING_SIZE);
+			Assert::AreEqual(str.capacity, (size_t)TF_SMALL_STRING_SIZE);
+			Assert::AreEqual(str.length, expectedLength);
+			ArraysAreEqual(test, TF_StringData(&str), testLength);
+		}
+
+		TEST_METHOD(Resize_LargeToSmall)
+		{
+			wchar_t test[] = L"123456789_10_11_12_13_14 💕😁👍";
+			size_t testLength = sizeof(test) / sizeof(test[0]);
+			TF_String str = TF_StringCreateEx(test, testLength);
+
+			size_t expectedLength = str.length;
+			TF_StringResize(&str, TF_SMALL_STRING_SIZE);
+			Assert::AreEqual(str.capacity, (size_t)TF_SMALL_STRING_SIZE);
+			Assert::AreEqual(str.length, (size_t)TF_SMALL_STRING_SIZE);
+
+			// We expect that the data now stored in the string is truncated to test[0..TF_SMALL_STRING_SIZE]
+			ArraysAreEqual(test, TF_StringData(&str), TF_SMALL_STRING_SIZE);
+		}
+
+		TEST_METHOD(Resize_LargeToLarge)
+		{
+			wchar_t test[] = L"00000000000000000000000000000000000000";
+			size_t testLength = sizeof(test) / sizeof(test[0]);
+			TF_String str = TF_StringCreateEx(test, testLength);
+
+			size_t expectedLength = str.length;
+			size_t expectedCapacity = testLength * 2;
+			TF_StringResize(&str, expectedCapacity);
+			Assert::AreEqual(str.capacity, expectedCapacity);
+			Assert::AreEqual(str.length, expectedLength);
+
+			ArraysAreEqual(test, TF_StringData(&str), expectedLength);
 		}
 	};
 }

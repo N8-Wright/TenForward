@@ -77,28 +77,44 @@ void TF_StringAppend(TF_String* str, const TF_String* other)
 
 void TF_StringResize(TF_String* str, size_t capacity)
 {
-	if (str->capacity <= TF_SMALL_STRING_SIZE && capacity > TF_SMALL_STRING_SIZE)
+	if (str->capacity <= TF_SMALL_STRING_SIZE)
 	{
-		wchar_t* data = malloc(capacity * sizeof(wchar_t));
-		if (data == NULL)
+		if (capacity <= TF_SMALL_STRING_SIZE)
 		{
-			exit(1);
+			return;
 		}
+		else
+		{
+			wchar_t* data = malloc(capacity * sizeof(wchar_t));
+			if (data == NULL)
+			{
+				exit(1);
+			}
 
-		memcpy(data, str->data, str->length * sizeof(wchar_t));
-		memcpy(str->data, &data, sizeof(wchar_t*));
-	}
+			memcpy(data, str->data, str->length * sizeof(wchar_t));
+			memcpy(str->data, &data, sizeof(wchar_t*));
+		}
+		}
 	else
 	{
 		wchar_t* data = GetDataPtr(str);
-		void *result = realloc(data, capacity * sizeof(wchar_t));
-		if (result == NULL)
+		if (capacity <= TF_SMALL_STRING_SIZE)
 		{
-			exit(1);
+			memcpy(str->data, data, capacity * sizeof(wchar_t));
+			str->length = capacity;
+			free(data);
 		}
+		else
+		{
+			void* result = realloc(data, capacity * sizeof(wchar_t));
+			if (result == NULL)
+			{
+				exit(1);
+			}
 
-		data = result;
-		memcpy(str->data, &data, sizeof(wchar_t*));
+			data = result;
+			memcpy(str->data, &data, sizeof(wchar_t*));
+		}
 	}
 
 	str->capacity = capacity;
