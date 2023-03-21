@@ -4,16 +4,18 @@
 #include "pch.h"
 #include "framework.h"
 
-static inline wchar_t* GetDataPtr(const TF_String *str)
+_Check_return_ static inline wchar_t* GetDataPtr(_In_ const TF_String *str)
 {
 	wchar_t* ptr;
 	memcpy(&ptr, str->data, sizeof(wchar_t*));
 	return ptr;
 }
 
-TF_String TF_StringCreateEx(wchar_t* str, size_t length)
+TF_String TF_StringCreateEx(
+	_In_reads_(length) const wchar_t* str,
+	_In_ size_t length)
 {
-	TF_String string;
+	TF_String string = { 0 };
 	string.length = length;
 
 	if (length > TF_SMALL_STRING_SIZE)
@@ -37,7 +39,7 @@ TF_String TF_StringCreateEx(wchar_t* str, size_t length)
 	return string;
 }
 
-const wchar_t* TF_StringData(const TF_String* str)
+_Must_inspect_result_ const wchar_t* TF_StringData(_In_ const TF_String* str)
 {
 	if (str->capacity > TF_SMALL_STRING_SIZE)
 	{
@@ -49,7 +51,7 @@ const wchar_t* TF_StringData(const TF_String* str)
 	}
 }
 
-void TF_StringDestroy(TF_String* str)
+void TF_StringDestroy(_In_ TF_String* str)
 {
 	if (str->length > TF_SMALL_STRING_SIZE)
 	{
@@ -57,7 +59,7 @@ void TF_StringDestroy(TF_String* str)
 	}
 }
 
-void TF_StringAppend(TF_String* str, const TF_String* other)
+void TF_StringAppend(_Inout_ TF_String* str, _In_ const TF_String* other)
 {
 	size_t capacity = str->length + other->length;
 	if (capacity > TF_SMALL_STRING_SIZE)
@@ -75,7 +77,7 @@ void TF_StringAppend(TF_String* str, const TF_String* other)
 	str->length = capacity;
 }
 
-void TF_StringResize(TF_String* str, size_t capacity)
+void TF_StringResize(_Inout_ TF_String* str, _In_ size_t capacity)
 {
 	if (str->capacity <= TF_SMALL_STRING_SIZE)
 	{
