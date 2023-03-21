@@ -51,8 +51,18 @@ extern "C"
 	/// <param name="str">The TF_String to destroy.</param>
 	void TF_StringDestroy(TF_String* str);
 
+	/// <summary>
+	/// Append a string to another string.
+	/// </summary>
+	/// <param name="str">The string to be appended to.</param>
+	/// <param name="other">The string to append.</param>
 	void TF_StringAppend(TF_String* str, const TF_String* other);
 
+	/// <summary>
+	/// Resize the reserved capacity of the string.
+	/// </summary>
+	/// <param name="str">The string to resize.</param>
+	/// <param name="capacity">The number of characters that the string should be able to store.</param>
 	void TF_StringResize(TF_String* str, size_t capacity);
 #ifdef __cplusplus
 }
