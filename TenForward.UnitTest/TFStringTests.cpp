@@ -16,6 +16,22 @@ namespace TFStringTests
 			}
 		}
 
+		TEST_METHOD(CreateEmptyString_SmallCapacity)
+		{
+			TF_String str = TF_StringCreate(1);
+			
+			Assert::AreEqual(str.capacity, (size_t)TF_SMALL_STRING_SIZE);
+			Assert::AreEqual(str.length, (size_t)0);
+		}
+
+		TEST_METHOD(CreateEmptyString_LargeCapacity)
+		{
+			TF_String str = TF_StringCreate(101);
+
+			Assert::AreEqual(str.capacity, (size_t)101);
+			Assert::AreEqual(str.length, (size_t)0);
+		}
+
 		TEST_METHOD(CreateSmallString)
 		{
 			wchar_t test[] = L"Hello";

@@ -39,6 +39,29 @@ TF_String TF_StringCreateEx(
 	return string;
 }
 
+TF_String TF_StringCreate(_In_ size_t capacity)
+{
+	TF_String string = { 0 };
+	string.length = 0;
+
+	if (capacity < TF_SMALL_STRING_SIZE)
+	{
+		string.capacity = TF_SMALL_STRING_SIZE;
+		return string;
+	}
+	else
+	{
+		string.capacity = capacity;
+		wchar_t* data = malloc(capacity * sizeof(wchar_t));
+		if (data == NULL)
+		{
+			exit(1);
+		}
+
+		return string;
+	}
+}
+
 _Must_inspect_result_ const wchar_t* TF_StringData(_In_ const TF_String* str)
 {
 	if (str->capacity > TF_SMALL_STRING_SIZE)

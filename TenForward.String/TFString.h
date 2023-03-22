@@ -40,6 +40,8 @@ extern "C"
 		_In_reads_(length) const wchar_t* str,
 		_In_ size_t length);
 
+	TF_String TF_StringCreate(_In_ size_t capacity);
+
 	/// <summary>
 	/// Get a pointer to the underlying string data. This underlying data can
 	/// change if any modifiable operation happens to the string, so don't
