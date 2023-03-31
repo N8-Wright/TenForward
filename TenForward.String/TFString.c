@@ -1,10 +1,13 @@
-// String.cpp : Defines the functions for the static library.
-//
-
 #include "pch.h"
 #include "framework.h"
 
-_Check_return_ static inline wchar_t* GetDataPtr(_In_ const TF_String *str)
+/// <summary>
+/// Used to get the pointer to the allocated string data (as opposed to the "short"
+/// inline data that is contained within the TF_String struct.
+/// </summary>
+/// <param name="str">The string to examine.</param>
+/// <returns>A pointer to the allocated string data.</returns>
+_Check_return_ static inline wchar_t* GetLongDataPtr(_In_ const TF_String *str)
 {
 	wchar_t* ptr;
 	memcpy(&ptr, str->data, sizeof(wchar_t*));
@@ -66,7 +69,7 @@ _Must_inspect_result_ const wchar_t* TF_StringData(_In_ const TF_String* str)
 {
 	if (str->capacity > TF_SMALL_STRING_SIZE)
 	{
-		return GetDataPtr(str);
+		return GetLongDataPtr(str);
 	}
 	else
 	{
@@ -78,7 +81,7 @@ void TF_StringDestroy(_In_ TF_String* str)
 {
 	if (str->length > TF_SMALL_STRING_SIZE)
 	{
-		free(GetDataPtr(str));
+		free(GetLongDataPtr(str));
 	}
 }
 
@@ -88,7 +91,7 @@ void TF_StringAppend(_Inout_ TF_String* str, _In_ const TF_String* other)
 	if (capacity > TF_SMALL_STRING_SIZE)
 	{
 		TF_StringResize(str, capacity);
-		wchar_t* data = GetDataPtr(str);
+		wchar_t* data = GetLongDataPtr(str);
 		
 		memcpy(&data[str->length], TF_StringData(other), other->length * sizeof(wchar_t));
 	}
@@ -122,7 +125,7 @@ void TF_StringResize(_Inout_ TF_String* str, _In_ size_t capacity)
 		}
 	else
 	{
-		wchar_t* data = GetDataPtr(str);
+		wchar_t* data = GetLongDataPtr(str);
 		if (capacity <= TF_SMALL_STRING_SIZE)
 		{
 			memcpy(str->data, data, capacity * sizeof(wchar_t));
