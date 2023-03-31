@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TenForward.String", "TenFor
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TenForward.UnitTest", "TenForward.UnitTest\TenForward.UnitTest.vcxproj", "{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TenForward.Common", "TenForward.Common\TenForward.Common.vcxproj", "{E341CBB0-C111-4C7D-87E3-6789E3C484F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Release|x64.Build.0 = Release|x64
 		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Release|x86.ActiveCfg = Release|Win32
 		{DAC2E0FC-AEEE-4736-B86A-49E3E44D4B9F}.Release|x86.Build.0 = Release|Win32
+		{E341CBB0-C111-4C7D-87E3-6789E3C484F4}.Debug|x64.ActiveCfg = Debug|x64
+		{E341CBB0-C111-4C7D-87E3-6789E3C484F4}.Debug|x64.Build.0 = Debug|x64
+		{E341CBB0-C111-4C7D-87E3-6789E3C484F4}.Debug|x86.ActiveCfg = Debug|Win32
+		{E341CBB0-C111-4C7D-87E3-6789E3C484F4}.Debug|x86.Build.0 = Debug|Win32
+		{E341CBB0-C111-4C7D-87E3-6789E3C484F4}.Release|x64.ActiveCfg = Release|x64
+		{E341CBB0-C111-4C7D-87E3-6789E3C484F4}.Release|x64.Build.0 = Release|x64
+		{E341CBB0-C111-4C7D-87E3-6789E3C484F4}.Release|x86.ActiveCfg = Release|Win32
+		{E341CBB0-C111-4C7D-87E3-6789E3C484F4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
