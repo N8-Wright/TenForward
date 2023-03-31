@@ -12,5 +12,6 @@
 #include "TFString.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #endif //PCH_H

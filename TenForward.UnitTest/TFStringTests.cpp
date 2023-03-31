@@ -20,7 +20,7 @@ namespace TFStringTests
 		{
 			TF_String str = TF_StringCreate(1);
 			
-			Assert::AreEqual(str.capacity, (size_t)TF_SMALL_STRING_SIZE);
+			Assert::AreEqual(TF_StringCapacity(&str), (size_t)TF_SMALL_STRING_SIZE);
 			Assert::AreEqual(str.length, (size_t)0);
 		}
 
@@ -28,7 +28,7 @@ namespace TFStringTests
 		{
 			TF_String str = TF_StringCreate(101);
 
-			Assert::AreEqual(str.capacity, (size_t)101);
+			Assert::AreEqual(TF_StringCapacity(&str), (size_t)101);
 			Assert::AreEqual(str.length, (size_t)0);
 		}
 
@@ -39,8 +39,8 @@ namespace TFStringTests
 			TF_String str = TF_StringCreateEx(test, length);
 
 			Assert::AreEqual(str.length, length);
-			Assert::AreEqual(str.capacity, (size_t)TF_SMALL_STRING_SIZE);
-			ArraysAreEqual(test, str.data, length);
+			Assert::AreEqual(TF_StringCapacity(&str), (size_t)TF_SMALL_STRING_SIZE);
+			ArraysAreEqual(test, TF_StringData(&str), length);
 		}
 
 		TEST_METHOD(CreateLargerString)
@@ -50,7 +50,7 @@ namespace TFStringTests
 			TF_String str = TF_StringCreateEx(test, length);
 
 			Assert::AreEqual(str.length, length);
-			Assert::AreEqual(str.capacity, length);
+			Assert::AreEqual(TF_StringCapacity(&str), length);
 			ArraysAreEqual(test, TF_StringData(&str), length);
 
 			TF_StringDestroy(&str);
@@ -71,7 +71,7 @@ namespace TFStringTests
 
 			wchar_t expected[] = L"Hello World! This is a test append.";
 			Assert::AreEqual(str1.length, length1 + length2);
-			Assert::AreEqual(str1.capacity, length1 + length2);
+			Assert::AreEqual(TF_StringCapacity(&str1), length1 + length2);
 			ArraysAreEqual(
 				expected,
 				TF_StringData(&str1),
@@ -104,7 +104,7 @@ namespace TFStringTests
 				L"in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat "
 				L"non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Small";
 			Assert::AreEqual(str1.length, length1 + length2);
-			Assert::AreEqual(str1.capacity, length1 + length2);
+			Assert::AreEqual(TF_StringCapacity(&str1), length1 + length2);
 			ArraysAreEqual(
 				expected,
 				TF_StringData(&str1),
@@ -129,7 +129,7 @@ namespace TFStringTests
 
 			wchar_t expected[] = L"Hello World!";
 			Assert::AreEqual(str1.length, length1 + length2);
-			Assert::AreEqual(str1.capacity, length1 + length2);
+			Assert::AreEqual(TF_StringCapacity(&str1), length1 + length2);
 			ArraysAreEqual(
 				expected,
 				TF_StringData(&str1),
@@ -147,7 +147,7 @@ namespace TFStringTests
 
 			size_t expectedLength = str.length;
 			TF_StringResize(&str, 100);
-			Assert::AreEqual(str.capacity, (size_t)100);
+			Assert::AreEqual(TF_StringCapacity(&str), (size_t)100);
 			Assert::AreEqual(str.length, expectedLength);
 			ArraysAreEqual(test, TF_StringData(&str), testLength);
 		}
@@ -160,7 +160,7 @@ namespace TFStringTests
 
 			size_t expectedLength = str.length;
 			TF_StringResize(&str, TF_SMALL_STRING_SIZE);
-			Assert::AreEqual(str.capacity, (size_t)TF_SMALL_STRING_SIZE);
+			Assert::AreEqual(TF_StringCapacity(&str), (size_t)TF_SMALL_STRING_SIZE);
 			Assert::AreEqual(str.length, expectedLength);
 			ArraysAreEqual(test, TF_StringData(&str), testLength);
 		}
@@ -173,7 +173,7 @@ namespace TFStringTests
 
 			size_t expectedLength = str.length;
 			TF_StringResize(&str, TF_SMALL_STRING_SIZE);
-			Assert::AreEqual(str.capacity, (size_t)TF_SMALL_STRING_SIZE);
+			Assert::AreEqual(TF_StringCapacity(&str), (size_t)TF_SMALL_STRING_SIZE);
 			Assert::AreEqual(str.length, (size_t)TF_SMALL_STRING_SIZE);
 
 			// We expect that the data now stored in the string is truncated to test[0..TF_SMALL_STRING_SIZE]
@@ -189,7 +189,7 @@ namespace TFStringTests
 			size_t expectedLength = str.length;
 			size_t expectedCapacity = testLength * 2;
 			TF_StringResize(&str, expectedCapacity);
-			Assert::AreEqual(str.capacity, expectedCapacity);
+			Assert::AreEqual(TF_StringCapacity(&str), expectedCapacity);
 			Assert::AreEqual(str.length, expectedLength);
 
 			ArraysAreEqual(test, TF_StringData(&str), expectedLength);

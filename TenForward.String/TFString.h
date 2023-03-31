@@ -5,16 +5,28 @@
 TF_BEGIN_HEADER
 
 #if _WIN64
-#define TF_SMALL_STRING_SIZE 8
-#elif _WIN32
 #define TF_SMALL_STRING_SIZE 12
+#elif _WIN32
+#define TF_SMALL_STRING_SIZE 13
 #endif
 
 typedef struct _TF_String
 {
 	size_t length;
-	size_t capacity;
-	wchar_t data[TF_SMALL_STRING_SIZE];
+
+	union
+	{
+		struct _TF_SmallString
+		{
+			wchar_t data[TF_SMALL_STRING_SIZE];
+		} smallStr;
+
+		struct _TF_LongString
+		{
+			size_t capacity;
+			wchar_t* data;
+		} longStr;
+	} impl;
 } TF_String;
 
 static_assert(sizeof(TF_String) == 32, "Sizeof string should be 32 bytes");
@@ -48,6 +60,9 @@ TF_String TF_StringCreate(_In_ size_t capacity);
 /// <param name="str">The TF_String's data to examine.</param>
 /// <returns>A pointer to the data. This is not guaranteed to be null-terminated.</returns>
 _Must_inspect_result_ const wchar_t* TF_StringData(
+	_In_ const TF_String* str);
+
+_Must_inspect_result_ const size_t TF_StringCapacity(
 	_In_ const TF_String* str);
 
 /// <summary>
