@@ -147,3 +147,24 @@ void TF_StringResize(_Inout_ TF_String* str, _In_ size_t capacity)
 
 	str->capacity = capacity;
 }
+
+TF_String TF_StringSubstr(_In_ const TF_String* str, size_t startIndex)
+{
+	return TF_StringSubstrEx(str, startIndex, str->length);
+}
+
+TF_String TF_StringSubstrEx(_In_ const TF_String* str, size_t startIndex, size_t endIndex)
+{
+	size_t substrSize = endIndex - startIndex;
+	wchar_t* data;
+	if (str->capacity <= TF_SMALL_STRING_SIZE)
+	{
+		data = str->data;
+	}
+	else
+	{
+		data = GetLongDataPtr(str);
+	}
+
+	return TF_StringCreateEx(data + startIndex, substrSize);
+}

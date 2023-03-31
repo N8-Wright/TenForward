@@ -194,5 +194,35 @@ namespace TFStringTests
 
 			ArraysAreEqual(test, TF_StringData(&str), expectedLength);
 		}
+
+		TEST_METHOD(Substr_CreatesSubstrWithStartIndex)
+		{
+			wchar_t test[] = L"Hello world! 123456789";
+			size_t testLength = sizeof(test) / sizeof(test[0]);
+			TF_String str = TF_StringCreateEx(test, testLength);
+			TF_String substr = TF_StringSubstr(&str, 13);
+
+			wchar_t expected[] = L"123456789";
+			size_t expectedLength = sizeof(expected) / sizeof(expected[0]);
+			ArraysAreEqual(expected, TF_StringData(&substr), expectedLength);
+
+			TF_StringDestroy(&str);
+			TF_StringDestroy(&substr);
+		}
+
+		TEST_METHOD(Substr_CreatesSubstrWithStartAndEndIndex)
+		{
+			wchar_t test[] = L"Hello world! 123456789";
+			size_t testLength = sizeof(test) / sizeof(test[0]);
+			TF_String str = TF_StringCreateEx(test, testLength);
+			TF_String substr = TF_StringSubstrEx(&str, 13, 16);
+
+			wchar_t expected[] = L"123";
+			size_t expectedLength = sizeof(expected) / sizeof(expected[0]);
+			ArraysAreEqual(expected, TF_StringData(&substr), expectedLength);
+
+			TF_StringDestroy(&str);
+			TF_StringDestroy(&substr);
+		}
 	};
 }

@@ -69,4 +69,7 @@ void TF_StringAppend(_Inout_ TF_String* str, _In_ const TF_String* other);
 /// <param name="str">The string to resize.</param>
 /// <param name="capacity">The number of characters that the string should be able to store.</param>
 void TF_StringResize(_Inout_ TF_String* str, _In_ size_t capacity);
+
+TF_String TF_StringSubstr(_In_ const TF_String* str, size_t startIndex);
+TF_String TF_StringSubstrEx(_In_ const TF_String* str, size_t startIndex, size_t endIndex);
 TF_END_HEADER
