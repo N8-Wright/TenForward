@@ -65,6 +65,9 @@ _Must_inspect_result_ const wchar_t* TF_StringData(
 _Must_inspect_result_ const size_t TF_StringCapacity(
 	_In_ const TF_String* str);
 
+_Must_inspect_result_ const size_t TF_StringLength(
+	_In_ const TF_String* str);
+
 /// <summary>
 /// Frees any underlying data associated with a TF_String.
 /// </summary>
