@@ -36,6 +36,51 @@ static inline size_t GetLongLength(_In_ const TF_String* str)
 	return result;
 }
 
+static void TF_StringResizeSmall(_Inout_ TF_String* str, _In_ size_t capacity)
+{
+	wchar_t* originalData = str->impl.smallStr.data;
+	if (capacity <= TF_SMALL_STRING_SIZE)
+	{
+		return;
+	}
+	else
+	{
+		wchar_t* data = malloc(capacity * sizeof(wchar_t));
+		if (data == NULL)
+		{
+			exit(1);
+		}
+
+		memcpy(data, originalData, str->length * sizeof(wchar_t));
+
+		str->impl.longStr.capacity = capacity;
+		str->impl.longStr.data = data;
+		SetLong(str);
+	}
+}
+
+static void TF_StringResizeLong(_Inout_ TF_String* str, _In_ size_t capacity)
+{
+	wchar_t* originalData = str->impl.longStr.data;
+	if (capacity <= TF_SMALL_STRING_SIZE)
+	{
+		memcpy(str->impl.smallStr.data, originalData, capacity * sizeof(wchar_t));
+		str->length = capacity;
+		free(originalData);
+	}
+	else
+	{
+		void* result = realloc(originalData, capacity * sizeof(wchar_t));
+		if (result == NULL)
+		{
+			exit(1);
+		}
+
+		str->impl.longStr.data = result;
+		str->impl.longStr.capacity = capacity;
+	}
+}
+
 TF_String TF_StringCreateEx(
 	_In_reads_(length) const wchar_t* str,
 	_In_ size_t length)
@@ -145,7 +190,7 @@ void TF_StringAppend(_Inout_ TF_String* str, _In_ const TF_String* other)
 		const size_t capacity = strLength + otherLength;
 		if (capacity > TF_SMALL_STRING_SIZE)
 		{
-			TF_StringResize(str, capacity);
+			TF_StringResizeSmall(str, capacity);
 			data = str->impl.longStr.data;
 			str->length = capacity;
 			SetLong(str);
@@ -163,7 +208,7 @@ void TF_StringAppend(_Inout_ TF_String* str, _In_ const TF_String* other)
 		const size_t capacity = strLength + otherLength;
 		if (capacity > str->impl.longStr.capacity)
 		{
-			TF_StringResize(str, capacity);
+			TF_StringResizeLong(str, capacity);
 		}
 		
 		str->length = capacity;
@@ -178,46 +223,11 @@ void TF_StringResize(_Inout_ TF_String* str, _In_ size_t capacity)
 {
 	if (IsSmall(str))
 	{
-		wchar_t* originalData = str->impl.smallStr.data;
-		if (capacity <= TF_SMALL_STRING_SIZE)
-		{
-			return;
-		}
-		else
-		{
-			wchar_t* data = malloc(capacity * sizeof(wchar_t));
-			if (data == NULL)
-			{
-				exit(1);
-			}
-
-			memcpy(data, originalData, str->length * sizeof(wchar_t));
-
-			str->impl.longStr.capacity = capacity;
-			str->impl.longStr.data = data;
-			SetLong(str);
-		}
+		TF_StringResizeSmall(str, capacity);
 	}
 	else
 	{
-		wchar_t* originalData = str->impl.longStr.data;
-		if (capacity <= TF_SMALL_STRING_SIZE)
-		{
-			memcpy(str->impl.smallStr.data, originalData, capacity * sizeof(wchar_t));
-			str->length = capacity;
-			free(originalData);
-		}
-		else
-		{
-			void* result = realloc(originalData, capacity * sizeof(wchar_t));
-			if (result == NULL)
-			{
-				exit(1);
-			}
-
-			str->impl.longStr.data = result;
-			str->impl.longStr.capacity = capacity;
-		}
+		TF_StringResizeLong(str, capacity);
 	}
 }
 
