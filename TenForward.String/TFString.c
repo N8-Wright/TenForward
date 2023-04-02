@@ -2,38 +2,31 @@
 #include "framework.h"
 
 #define LONG_STRING_BYTE_SET 1
+
+#ifdef _WIN64
+#define TF_STRING_BYTE_MARKER_MASK ((size_t)1 << 63)
+#else
+#define TF_STRING_BYTE_MARKER_MASK ((size_t)1 << 31)
+#endif
+
 _Check_return_ static inline bool IsSmall(_In_ const TF_String* str)
 {
-	// Examine the first byte of the string
-	unsigned char byte[sizeof(size_t)];
-	memcpy(byte, &str->length, sizeof(size_t));
-	return (byte[sizeof(size_t) - 1] & 0b10000000) == 0;
+	return (str->length & TF_STRING_BYTE_MARKER_MASK) == 0;
 }
 
 static inline void SetLong(_In_ TF_String* str)
 {
-	unsigned char byte[sizeof(size_t)];
-	memcpy(byte, &str->length, sizeof(size_t));
-	byte[sizeof(size_t) - 1] |= 0b10000000;
-	memcpy(&str->length, byte, sizeof(size_t));
+	str->length |= TF_STRING_BYTE_MARKER_MASK;
 }
 
 static inline void SetSmall(_In_ TF_String* str)
 {
-	unsigned char byte[sizeof(size_t)];
-	memcpy(&byte, &str->length, sizeof(size_t));
-	byte[sizeof(size_t) - 1] &= ~0b10000000;
-	memcpy(&str->length, byte, sizeof(size_t));
+	str->length &= ~TF_STRING_BYTE_MARKER_MASK;
 }
 
 static inline size_t GetLongLength(_In_ const TF_String* str)
 {
-	unsigned char byte[sizeof(size_t)];
-	size_t result;
-	memcpy(byte, &str->length, sizeof(size_t));
-	byte[sizeof(size_t) - 1] &= ~0b10000000;
-	memcpy(&result, byte, sizeof(size_t));
-	return result;
+	return str->length & ~TF_STRING_BYTE_MARKER_MASK;
 }
 
 static void TF_StringResizeSmall(_Inout_ TF_String* str, _In_ size_t capacity)
