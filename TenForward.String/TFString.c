@@ -14,12 +14,12 @@ _Check_return_ static inline bool IsSmall(_In_ const TF_String* str)
 	return (str->length & TF_STRING_BYTE_MARKER_MASK) == 0;
 }
 
-static inline void SetLong(_In_ TF_String* str)
+static inline void SetLongBit(_In_ TF_String* str)
 {
 	str->length |= TF_STRING_BYTE_MARKER_MASK;
 }
 
-static inline void SetSmall(_In_ TF_String* str)
+static inline void SetSmallBit(_In_ TF_String* str)
 {
 	str->length &= ~TF_STRING_BYTE_MARKER_MASK;
 }
@@ -48,7 +48,7 @@ static void TF_StringResizeSmall(_Inout_ TF_String* str, _In_ size_t capacity)
 
 		str->impl.longStr.capacity = capacity;
 		str->impl.longStr.data = data;
-		SetLong(str);
+		SetLongBit(str);
 	}
 }
 
@@ -83,7 +83,7 @@ TF_String TF_StringCreateEx(
 
 	if (length > TF_SMALL_STRING_SIZE)
 	{
-		SetLong(&string);
+		SetLongBit(&string);
 		string.impl.longStr.capacity = length;
 		wchar_t* data = malloc(length * sizeof(wchar_t));
 		if (data == NULL)
@@ -121,7 +121,7 @@ TF_String TF_StringCreate(_In_ size_t capacity)
 		}
 
 		string.impl.longStr.data = data;
-		SetLong(&string);
+		SetLongBit(&string);
 		return string;
 	}
 }
@@ -186,7 +186,7 @@ void TF_StringAppend(_Inout_ TF_String* str, _In_ const TF_String* other)
 			TF_StringResizeSmall(str, capacity);
 			data = str->impl.longStr.data;
 			str->length = capacity;
-			SetLong(str);
+			SetLongBit(str);
 		}
 		else
 		{
@@ -205,7 +205,7 @@ void TF_StringAppend(_Inout_ TF_String* str, _In_ const TF_String* other)
 		}
 		
 		str->length = capacity;
-		SetLong(str);
+		SetLongBit(str);
 		data = str->impl.longStr.data;
 	}
 
