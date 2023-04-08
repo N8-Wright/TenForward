@@ -169,7 +169,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TenForward.String\TenForward.String.vcxproj">
+    <ProjectReference Include="..\TenForward.Containers\TenForward.Containers.vcxproj">
       <Project>{722c454b-f5b0-4dfb-84f6-57c99905b980}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -8,6 +8,6 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
-#include "TenForward.String/TFString.h"
+#include "TenForward.Containers/TFString.h"
 
 #endif //PCH_H

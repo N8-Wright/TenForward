@@ -24,7 +24,7 @@
     <ProjectGuid>{722c454b-f5b0-4dfb-84f6-57c99905b980}</ProjectGuid>
     <RootNamespace>String</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>TenForward.String</ProjectName>
+    <ProjectName>TenForward.Containers</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
