@@ -231,5 +231,62 @@ namespace TFStringTests
 			TF_StringDestroy(&str);
 			TF_StringDestroy(&substr);
 		}
+
+		TEST_METHOD(Substr_StartIndexGreaterThanEndIndex_InvalidStringReturned)
+		{
+			wchar_t test[] = L"Test string";
+			size_t length = sizeof(test) / sizeof(test[0]);
+
+			TF_String str = TF_StringCreateEx(test, length);
+			TF_String substr = TF_StringSubstrEx(&str, 2, 1);
+			
+			Assert::AreEqual(TF_StringLength(&substr), (size_t)0);
+		}
+
+		TEST_METHOD(Substr_Small_EndIndexGreaterThanStringLength_InvalidStringReturned)
+		{
+			wchar_t test[] = L"Test string";
+			size_t length = sizeof(test) / sizeof(test[0]);
+
+			TF_String str = TF_StringCreateEx(test, length);
+			TF_String substr = TF_StringSubstrEx(&str, 0, length + 1);
+
+			Assert::AreEqual(TF_StringLength(&substr), (size_t)0);
+		}
+
+		TEST_METHOD(Substr_Long_EndIndexGreaterThanStringLength_InvalidStringReturned)
+		{
+			wchar_t test[] = L"Test string. 123123123123123123123123123123123123123";
+			size_t length = sizeof(test) / sizeof(test[0]);
+
+			TF_String str = TF_StringCreateEx(test, length);
+			TF_String substr = TF_StringSubstrEx(&str, 0, length + 1);
+
+			Assert::AreEqual(TF_StringLength(&substr), (size_t)0);
+
+			TF_StringDestroy(&str);
+		}
+
+		TEST_METHOD(Substr_Small_StartIndexGreaterThanStringLength_InvalidStringReturned)
+		{
+			wchar_t test[] = L"Test string";
+			size_t length = sizeof(test) / sizeof(test[0]);
+
+			TF_String str = TF_StringCreateEx(test, length);
+			TF_String substr = TF_StringSubstr(&str, length + 1);
+
+			Assert::AreEqual(TF_StringLength(&substr), (size_t)0);
+		}
+
+		TEST_METHOD(Substr_Long_StartIndexGreaterThanStringLength_InvalidStringReturned)
+		{
+			wchar_t test[] = L"Test string. 123123123123123123123123123123123123123";
+			size_t length = sizeof(test) / sizeof(test[0]);
+
+			TF_String str = TF_StringCreateEx(test, length);
+			TF_String substr = TF_StringSubstr(&str, length + 1);
+
+			Assert::AreEqual(TF_StringLength(&substr), (size_t)0);
+		}
 	};
 }

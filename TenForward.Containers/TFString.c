@@ -231,14 +231,31 @@ TF_String TF_StringSubstr(_In_ const TF_String* str, size_t startIndex)
 
 TF_String TF_StringSubstrEx(_In_ const TF_String* str, size_t startIndex, size_t endIndex)
 {
+	if (startIndex >= endIndex)
+	{
+		return TF_StringCreate(1);
+	}
+
 	size_t substrSize = endIndex - startIndex;
 	const wchar_t* data;
 	if (IsSmall(str))
 	{
+		size_t length = str->length;
+		if (startIndex > length || endIndex > length)
+		{
+			return TF_StringCreate(1);
+		}
+
 		data = str->impl.smallStr.data;
 	}
 	else
 	{
+		size_t length = GetLongLength(str);
+		if (startIndex > length || endIndex > length)
+		{
+			return TF_StringCreate(1);
+		}
+
 		data = str->impl.longStr.data;
 	}
 
