@@ -10,6 +10,7 @@
 // add headers that you want to pre-compile here
 #include "framework.h"
 #include "TFString.h"
+#include "TFArray.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>

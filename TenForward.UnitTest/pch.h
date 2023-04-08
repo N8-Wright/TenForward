@@ -9,5 +9,6 @@
 
 // add headers that you want to pre-compile here
 #include "TenForward.Containers/TFString.h"
+#include "TenForward.Containers/TFArray.h"
 
 #endif //PCH_H

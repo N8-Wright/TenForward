@@ -3,7 +3,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace TFStringTests
+namespace Containers
 {
 	TEST_CLASS(TFStringTests)
 	{
