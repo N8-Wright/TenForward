@@ -62,13 +62,13 @@ namespace TFStringTests
 			size_t length1 = sizeof(test1) / sizeof(test1[0]) - 1;
 			TF_String str1 = TF_StringCreateEx(test1, length1);
 
-			wchar_t test2[] = L" World! This is a test append.";
+			wchar_t test2[] = L" World! This is a test append. 123456789101112131415";
 			size_t length2 = sizeof(test2) / sizeof(test2[0]) - 1;
 			TF_String str2 = TF_StringCreateEx(test2, length2);
 
 			TF_StringAppend(&str1, &str2);
 
-			wchar_t expected[] = L"Hello World! This is a test append.";
+			wchar_t expected[] = L"Hello World! This is a test append. 123456789101112131415";
 			Assert::AreEqual(TF_StringLength(&str1), length1 + length2);
 			Assert::AreEqual(TF_StringCapacity(&str1), length1 + length2);
 			ArraysAreEqual(
