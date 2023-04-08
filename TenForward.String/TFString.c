@@ -138,7 +138,7 @@ _Must_inspect_result_ const wchar_t* TF_StringData(_In_ const TF_String* str)
 	}
 }
 
-_Must_inspect_result_ const size_t TF_StringCapacity(_In_ const TF_String* str)
+_Check_return_ const size_t TF_StringCapacity(_In_ const TF_String* str)
 {
 	if (IsSmall(str))
 	{
@@ -150,7 +150,7 @@ _Must_inspect_result_ const size_t TF_StringCapacity(_In_ const TF_String* str)
 	}
 }
 
-_Must_inspect_result_ const size_t TF_StringLength(_In_ const TF_String* str)
+_Check_return_ const size_t TF_StringLength(_In_ const TF_String* str)
 {
 	if (IsSmall(str))
 	{
