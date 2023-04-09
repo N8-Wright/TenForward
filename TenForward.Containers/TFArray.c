@@ -72,3 +72,15 @@ void TF_ArrayPop(_In_ TF_Array* array, _In_ size_t size, _Out_opt_ void* item)
 		item = NULL;
 	}
 }
+
+void* TF_ArrayAt(_In_ TF_Array* array, _In_ size_t index, _In_ size_t size)
+{
+	if (index < array->length)
+	{
+		return array->data + (size * index);
+	}
+	else
+	{
+		return NULL;
+	}
+}

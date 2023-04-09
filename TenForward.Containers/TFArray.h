@@ -55,4 +55,13 @@ void TF_ArrayPush(_Inout_ TF_Array** array, _In_ size_t size, _In_ const void* i
 /// <param name="size">The size of the item that is intended to be stored.</param>
 /// <param name="item">Optionally copy the removd item to this variable.</param>
 void TF_ArrayPop(_In_ TF_Array* array, _In_ size_t size, _Out_opt_ void* item);
+
+/// <summary>
+/// Gets the item at a particular index.
+/// </summary>
+/// <param name="array">The array to examine.</param>
+/// <param name="index">The index to look at.</param>
+/// <param name="size">The size of the item that is intended to be stored.</param>
+/// <returns>The item at the corresponding index.</returns>
+void* TF_ArrayAt(_In_ TF_Array* array, _In_ size_t index, _In_ size_t size);
 TF_END_HEADER
