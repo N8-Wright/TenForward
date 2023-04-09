@@ -59,5 +59,40 @@ namespace Containers
 			Assert::IsTrue(array->capacity > 2);
 			TF_ArrayDestroy(array);
 		}
+
+		TEST_METHOD(Pop_ReducesLengthByOne)
+		{
+			TF_Array* array = TF_ArrayCreate(sizeof(int));
+
+			int item = 123;
+			TF_ArrayPush(&array, sizeof(item), &item);
+			TF_ArrayPop(array, sizeof(item), NULL);
+
+			Assert::AreEqual((size_t)0, array->length);
+			TF_ArrayDestroy(array);
+		}
+
+		TEST_METHOD(Pop_SetsValueToPoppedItem)
+		{
+			TF_Array* array = TF_ArrayCreate(sizeof(int));
+
+			int item = 123;
+			TF_ArrayPush(&array, sizeof(item), &item);
+
+			int result;
+			TF_ArrayPop(array, sizeof(item), &result);
+
+			Assert::AreEqual(item, result);
+			TF_ArrayDestroy(array);
+		}
+
+		TEST_METHOD(Pop_ArrayHasNoValues_LengthNotReduced)
+		{
+			TF_Array* array = TF_ArrayCreate(sizeof(int));
+			TF_ArrayPop(array, sizeof(int), NULL);
+
+			Assert::AreEqual((size_t)0, array->length);
+			TF_ArrayDestroy(array);
+		}
 	};
 }

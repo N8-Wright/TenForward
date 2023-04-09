@@ -48,4 +48,11 @@ void TF_ArrayResize(_Inout_ TF_Array** array, _In_ size_t size, _In_ size_t capa
 /// <param name="item">The item to append.</param>
 void TF_ArrayPush(_Inout_ TF_Array** array, _In_ size_t size, _In_ const void* item);
 
+/// <summary>
+/// Remove the last item from the array.
+/// </summary>
+/// <param name="array">The array to modify.</param>
+/// <param name="size">The size of the item that is intended to be stored.</param>
+/// <param name="item">Optionally copy the removd item to this variable.</param>
+void TF_ArrayPop(_In_ TF_Array* array, _In_ size_t size, _Out_opt_ void* item);
 TF_END_HEADER

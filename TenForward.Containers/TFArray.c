@@ -54,3 +54,21 @@ void TF_ArrayPush(_Inout_ TF_Array** array, _In_ size_t size, _In_ const void* i
 	memcpy(offset, item, size);
 	(*array)->length++;
 }
+
+void TF_ArrayPop(_In_ TF_Array* array, _In_ size_t size, _Out_opt_ void* item)
+{
+	if (array->length > 0)
+	{
+		array->length--;
+
+		if (item != NULL)
+		{
+			char* offset = array->data + (array->length * size);
+			memcpy(item, offset, size);
+		}
+	}
+	else
+	{
+		item = NULL;
+	}
+}
