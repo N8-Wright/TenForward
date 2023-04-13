@@ -40,6 +40,6 @@ typedef struct _TF_Dict
 	TF_DictBucket** buckets;
 } TF_Dict;
 
-TF_Dict TF_DictCreate(_In_ TF_DictHash hash, _In_ TF_DictEqual equal);
+TF_Dict TF_DictCreate(_In_ size_t capacity, _In_ TF_DictHash hash, _In_ TF_DictEqual equal);
 void TF_DictAddOrUpdate(_In_ TF_Dict* dict, _In_ void* key, _In_ void* value);
 TF_END_HEADER

@@ -1,14 +1,14 @@
 #include "pch.h"
 
-TF_Dict TF_DictCreate(_In_ TF_DictHash hash, _In_ TF_DictEqual equal)
+TF_Dict TF_DictCreate(_In_ size_t capacity, _In_ TF_DictHash hash, _In_ TF_DictEqual equal)
 {
 	TF_Dict dict;
 	dict.hash = hash;
 	dict.equal = equal;
 
 	dict.length = 0;
-	dict.bucketsCapacity = 10;
-	dict.buckets = calloc(10, sizeof(dict.buckets));
+	dict.bucketsCapacity = capacity;
+	dict.buckets = calloc(capacity, sizeof(dict.buckets));
 	return dict;
 }
 
@@ -22,6 +22,7 @@ static bool TF_DictInsertIntoBucket(_In_ TF_DictEqual equal, _In_ TF_DictBucket*
 	}
 	else
 	{
+		TF_DictBucket* prev = NULL;
 		while (iter != NULL)
 		{
 			if (equal(iter->key, node->key))
@@ -31,9 +32,11 @@ static bool TF_DictInsertIntoBucket(_In_ TF_DictEqual equal, _In_ TF_DictBucket*
 				return false;
 			}
 
+			prev = iter;
 			iter = iter->next;
 		}
 
+		prev->next = node;
 		return true;
 	}
 }
