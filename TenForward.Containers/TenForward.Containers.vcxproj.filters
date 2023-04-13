@@ -30,6 +30,9 @@
     <ClInclude Include="TFDictionary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TFDictionaryUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TFString.c">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TFDictionary.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TFDictionaryUtil.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -148,6 +148,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="TFArray.h" />
     <ClInclude Include="TFDictionary.h" />
+    <ClInclude Include="TFDictionaryUtil.h" />
     <ClInclude Include="TFString.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     </ClCompile>
     <ClCompile Include="TFArray.c" />
     <ClCompile Include="TFDictionary.c" />
+    <ClCompile Include="TFDictionaryUtil.c" />
     <ClCompile Include="TFString.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
