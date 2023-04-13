@@ -147,6 +147,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TFArray.h" />
+    <ClInclude Include="TFDictionary.h" />
     <ClInclude Include="TFString.h" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TFArray.c" />
+    <ClCompile Include="TFDictionary.c" />
     <ClCompile Include="TFString.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

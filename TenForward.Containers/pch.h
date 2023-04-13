@@ -11,6 +11,7 @@
 #include "framework.h"
 #include "TFString.h"
 #include "TFArray.h"
+#include "TFDictionary.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
