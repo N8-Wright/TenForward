@@ -28,10 +28,18 @@ typedef struct _TF_Dict
 	TF_DictHash hash;
 	TF_DictEqual equal;
 
-	size_t bucketsSize;
+	/// <summary>
+	/// The number of key/value pairs stored in the dictionary
+	/// </summary>
+	size_t length;
+
+	/// <summary>
+	/// The capacity of the backing array of buckets.
+	/// </summary>
+	size_t bucketsCapacity;
 	TF_DictBucket** buckets;
 } TF_Dict;
 
 TF_Dict TF_DictCreate(_In_ TF_DictHash hash, _In_ TF_DictEqual equal);
-void TF_DictInsert(_In_ TF_Dict* dict, _In_ void* key, _In_ void* value);
+void TF_DictAddOrUpdate(_In_ TF_Dict* dict, _In_ void* key, _In_ void* value);
 TF_END_HEADER
