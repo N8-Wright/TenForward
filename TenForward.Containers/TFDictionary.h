@@ -33,5 +33,5 @@ typedef struct _TF_Dict
 } TF_Dict;
 
 TF_Dict TF_DictCreate(_In_ TF_DictHash hash, _In_ TF_DictEqual equal);
-void TF_DictInsert(_In_ TF_Dict* dict, _In_ void* key, _In_ void* value, _In_ size_t keySize, _In_ size_t valueSize);
+void TF_DictInsert(_In_ TF_Dict* dict, _In_ void* key, _In_ void* value);
 TF_END_HEADER

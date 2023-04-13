@@ -7,19 +7,19 @@ TF_Dict TF_DictCreate(_In_ TF_DictHash hash, _In_ TF_DictEqual equal)
 	dict.equal = equal;
 
 	dict.bucketsSize = 10;
-	dict.buckets = malloc(sizeof(dict.buckets) * 10);
+	dict.buckets = calloc(10, sizeof(dict.buckets));
 	return dict;
 }
 
 static void TF_DictInsertIntoBucket(_In_ TF_DictEqual equal, _In_ TF_DictBucket** bucket, _In_ TF_DictBucket* node)
 {
-	if (bucket == NULL)
+	TF_DictBucket* iter = *bucket;
+	if (iter == NULL)
 	{
 		*bucket = node;
 	}
 	else
 	{
-		TF_DictBucket* iter = *bucket;
 		while (iter != NULL)
 		{
 			if (equal(iter->key, node->key))

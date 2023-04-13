@@ -164,6 +164,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TFArrayTests.cpp" />
+    <ClCompile Include="TFDictionaryTests.cpp" />
     <ClCompile Include="TFStringTests.cpp" />
   </ItemGroup>
   <ItemGroup>

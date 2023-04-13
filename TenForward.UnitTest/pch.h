@@ -10,5 +10,8 @@
 // add headers that you want to pre-compile here
 #include "TenForward.Containers/TFString.h"
 #include "TenForward.Containers/TFArray.h"
+#include "TenForward.Containers/TFDictionary.h"
+#include "TenForward.Containers/TFDictionaryUtil.h"
+#include "CppUnitTest.h"
 
 #endif //PCH_H

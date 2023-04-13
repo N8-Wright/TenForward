@@ -12,6 +12,7 @@
 #include "TFString.h"
 #include "TFArray.h"
 #include "TFDictionary.h"
+#include "TFDictionaryUtil.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
